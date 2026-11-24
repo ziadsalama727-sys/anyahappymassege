@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Anya 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg-night: #0b101b;
+    --card-surface: rgba(18, 27, 45, 0.88);
+    --pink-soft: #fbcfe8;
+    --rose-warm: #f9a8d4;
+    --cream-glow: #fef3c7;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #f1f5f9;
+    overflow-x: hidden;
+    background: linear-gradient(rgba(11, 16, 27, 0.74), rgba(11, 16, 27, 0.82)),
+                url('https://i.postimg.cc/jqhztKSS/IMG-20261124-214332-257.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#login { display: flex; }
+
+.glass-card {
+    background: var(--card-surface);
+    backdrop-filter: blur(16px);
+    padding: 34px 26px;
+    border-radius: 28px;
+    border: 1px solid rgba(251, 207, 232, 0.28);
+    width: 92%;
+    max-width: 390px;
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.5);
+}
+
+input {
+    padding: 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 86%;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    outline: none;
+}
+
+input::placeholder { color: #cbd5e1; }
+
+#errorBox {
+    background: rgba(190, 24, 93, 0.85);
+    color: #fff;
+    font-size: 13.5px;
+    margin: 8px 0 14px;
+    padding: 10px;
+    border-radius: 12px;
+    display: none;
+}
+
+button {
+    padding: 14px 26px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #f472b6, #fbcfe8);
+    color: #0b101b;
+    font-weight: 700;
+    width: 100%;
+    transition: 0.25s ease;
+}
+
+button:hover { transform: translateY(-2px); }
+
+.gentle-pill {
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(251, 207, 232, 0.35);
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: var(--pink-soft);
+    margin-bottom: 14px;
+}
+
+.anya-photo {
+    width: 88%;
+    max-width: 260px;
+    border-radius: 26px;
+    border: 2px solid rgba(251, 207, 232, 0.38);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+    margin: 6px 0 10px;
+    transition: opacity 0.35s ease;
+}
+
+#message {
+    background: var(--card-surface);
+    backdrop-filter: blur(14px);
+    padding: 26px;
+    border-radius: 26px;
+    margin: 16px 0;
+    font-size: 15.5px;
+    line-height: 1.9;
+    max-width: 94%;
+    width: 550px;
+    text-align: left;
+    direction: ltr;
+    white-space: pre-line;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.wish-btn {
+    max-width: 280px;
+    background: linear-gradient(45deg, #fbcfe8, #f9a8d4);
+    color: #0b101b;
+    margin-top: 6px;
+}
+
+#wishModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(11, 16, 27, 0.97);
+    backdrop-filter: blur(20px);
+    color: #f8fafc;
+    padding: 28px 22px;
+    border-radius: 26px;
+    width: 86%;
+    max-width: 420px;
+    z-index: 2000;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    border: 1px solid rgba(251, 207, 232, 0.4);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.7);
+}
+
+#wishModal.show { transform: translate(-50%, -50%) scale(1); }
+
+.bloom {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+}
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://files.catbox.moe/gy6cfw.mp3" type="audio/mpeg">
+</audio>
+
+<div class="page" id="login">
+    <div class="glass-card">
+        <h2 style="font-family:'Playfair Display'; color: var(--pink-soft); margin-top: 0;">For Anya 🌸</h2>
+        <p style="font-size: 14px; margin-bottom: 18px; color: #cbd5e1;">Type your name to open a warm little note made for you:</p>
+        <input type="text" id="username" placeholder="Your name...">
+        <div id="errorBox">Please type "Anya" to open 🌸</div>
+        <button onclick="openPage()">Open</button>
+    </div>
+</div>
+
+<div class="page" id="main">
+    <div class="gentle-pill">🌸 Wishing you all the best always 🌸</div>
+
+    <h1 style="font-family:'Playfair Display'; color: var(--pink-soft); margin: 6px 0 10px;">Hey Anya 🩷🌸</h1>
+
+    <img src="https://i.postimg.cc/jqhztKSS/IMG-20261124-214332-257.jpg" alt="Anya" class="anya-photo" id="anyaPhoto">
+
+    <div id="message"></div>
+
+    <button class="wish-btn" onclick="openWish()">A wish for you 🌷</button>
+</div>
+
+<div id="wishModal">
+    <h3 style="color: var(--pink-soft); font-family:'Playfair Display'; font-size: 21px; margin-top: 0;">Wishing You All the Best 🩷🌸</h3>
+    <p style="line-height: 1.85; font-size: 14.5px; text-align: left; direction: ltr; color: #e2e8f0;">
+        I truly wish you nothing but good things, genuine peace, and days that treat you gently.<br><br>
+        May you always have reasons to smile naturally, feel light inside, and keep blooming in your own time. 🩷🌷✨
+    </p>
+    <button onclick="closeWish()" style="margin-top: 12px;">Close 🩷</button>
+</div>
+
+<script>
+const anyaPhotos = [
+    "https://i.postimg.cc/jqhztKSS/IMG-20261124-214332-257.jpg",
+    "https://i.postimg.cc/G2w5wrh5/IMG-20261124-222139-047.jpg",
+    "https://i.postimg.cc/tTQMQyCc/IMG-20261124-222057-686.jpg",
+    "https://i.postimg.cc/gcfqg4jB/IMG-20261124-222858-754.jpg",
+    "https://i.postimg.cc/tRLtBDJr/IMG-20261124-222806-248.jpg",
+    "https://i.postimg.cc/FF2gTGzC/IMG-20261124-222739-072.jpg",
+    "https://i.postimg.cc/dQzm5n3H/IMG-20261124-222644-302.jpg"
+];
+let photoIndex = 0;
+
+function rotatePhotos() {
+    if (anyaPhotos.length <= 1) return;
+    const img = document.getElementById("anyaPhoto");
+    img.style.opacity = "0";
+    setTimeout(() => {
+        photoIndex = (photoIndex + 1) % anyaPhotos.length;
+        img.src = anyaPhotos[photoIndex];
+        img.style.opacity = "1";
+    }, 350);
+}
+
+function openPage() {
+    const val = document.getElementById("username").value.trim().toLowerCase();
+    if (val === "anya") {
+        const audio = document.getElementById("bgMusic");
+        if (audio) audio.play().catch(() => {});
+        document.getElementById("login").style.display = "none";
+        document.getElementById("main").style.display = "flex";
+        startTyping();
+        setInterval(spawnBloom, 750);
+        if (anyaPhotos.length > 1) {
+            setInterval(rotatePhotos, 4500);
+        }
+    } else {
+        document.getElementById("errorBox").style.display = "block";
+    }
+}
+
+const textToType = `Hey Anya... 🌸
+
+I made this little page because I really wanted to say something kind to you and send you good energy.
+
+You feel like a flower that blooms with your smile—whenever you smile, everything around you feels a little softer, brighter, and more alive.
+
+Even on quiet or ordinary days, I hope you keep finding small moments that make you smile for real. I genuinely wish you all the best, comfort, happiness, and every good thing coming your way. 🩷🌸🌷`;
+
+function startTyping() {
+    let idx = 0;
+    const target = document.getElementById("message");
+    target.innerHTML = "";
+    function step() {
+        if (idx < textToType.length) {
+            target.innerHTML += textToType.charAt(idx);
+            idx++;
+            setTimeout(step, 38);
+        }
+    }
+    step();
+}
+
+function spawnBloom() {
+    const item = document.createElement("div");
+    item.innerHTML = ["🌸", "🩷", "🌷", "💖"][Math.floor(Math.random() * 4)];
+    item.className = "bloom";
+    item.style.top = "-24px";
+    item.style.left = (Math.random() * 94) + "vw";
+    item.style.fontSize = "19px";
+    item.style.opacity = "0.55";
+    item.style.transition = "7.5s linear";
+    document.body.appendChild(item);
+
+    setTimeout(() => {
+        item.style.transform = "translateY(108vh)";
+        setTimeout(() => item.remove(), 7500);
+    }, 80);
+}
+
+function openWish() {
+    document.getElementById("wishModal").classList.add("show");
+}
+
+function closeWish() {
+    document.getElementById("wishModal").classList.remove("show");
+}
+</script>
+</body>
+</html>
